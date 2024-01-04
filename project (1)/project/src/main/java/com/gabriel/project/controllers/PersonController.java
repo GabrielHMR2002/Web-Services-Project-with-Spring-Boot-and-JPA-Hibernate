@@ -20,7 +20,8 @@ import java.util.UUID;
 public class PersonController {
 
     @Autowired
-    private PersonService personService;
+    private PersonService personService; //component registration
+    //The `PersonController` depends on `PersonService`.
     @PostMapping
     @Transactional
     public ResponseEntity<Person> registerPerson(@RequestBody @Valid RequestPerson dataPerson) {
@@ -28,7 +29,7 @@ public class PersonController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping //indica que esse método responde a requisições do tipo GET http
+    @GetMapping //indicates that this method handles HTTP GET requests
     public ResponseEntity<List<Person>> findAll() {
         List<Person> people = personService.getAllPersons();
         if(people.isEmpty()){
