@@ -3,6 +3,7 @@ package com.gabriel.project.controllers;
 import com.gabriel.project.entities.Person;
 import com.gabriel.project.entities.RequestPerson;
 import com.gabriel.project.repositories.PersonRepository;
+import com.gabriel.project.services.PersonService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -19,21 +20,22 @@ import java.util.UUID;
 public class PersonController {
 
     @Autowired
-    private PersonRepository repository;
-
+    private PersonService personService;
     @PostMapping
     @Transactional
     public ResponseEntity<Person> registerPerson(@RequestBody @Valid RequestPerson dataPerson) {
-        System.out.println(dataPerson);
-        var person = new Person();
-        BeanUtils.copyProperties(dataPerson, person);
-        System.out.println(person);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(person));
+        Person p = personService.registerPerson(dataPerson);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    
+
     @GetMapping //indica que esse método responde a requisições do tipo GET http
     public ResponseEntity<List<Person>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(repository.findAll());
+        List<Person> people = personService.getAllPersons();
+        if(people.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else{
+            return ResponseEntity.ok(people);
+        }
     }
 }
+
