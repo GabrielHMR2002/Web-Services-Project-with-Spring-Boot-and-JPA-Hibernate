@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.UUID;
 
-public record RequestOrder(@NotNull UUID id, @NotBlank Instant moment, @NotBlank Person client) {
+public record RequestOrder(UUID id, Instant moment, Person client) {
 }
 
 

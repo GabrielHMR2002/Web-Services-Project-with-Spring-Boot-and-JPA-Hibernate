@@ -1,5 +1,6 @@
 package com.gabriel.project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Person implements Serializable {
     private String email;
     private String phone;
     private String password;
+    @JsonIgnore //SUPER HIPER MEGA IMPORTANTE ESSA NOTAÇÃO
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
