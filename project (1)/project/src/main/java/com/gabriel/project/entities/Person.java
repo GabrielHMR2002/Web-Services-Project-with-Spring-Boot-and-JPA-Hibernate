@@ -22,7 +22,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    private String emai;
+    private String email;
     private String phone;
     private String password;
 
@@ -33,7 +33,7 @@ public class Person implements Serializable {
     public Person(UUID id, String name, String emai, String phone, String password) {
         this.id = id;
         this.name = name;
-        this.emai = emai;
+        this.email = emai;
         this.phone = phone;
         this.password = password;
     }
