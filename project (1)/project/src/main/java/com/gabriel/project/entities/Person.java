@@ -12,7 +12,7 @@ import java.util.UUID;
 
 
 @Entity(name = "person")
-@Table(name= "person")
+@Table(name = "person")
 @EqualsAndHashCode(of = "id")
 @Getter
 @Setter
@@ -27,10 +27,10 @@ public class Person implements Serializable {
     private String email;
     private String phone;
     private String password;
-
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-    public Person (){
+    public Person() {
 
     }
 
@@ -42,7 +42,7 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public List<Order> getOrders(){
+    public List<Order> getOrders() {
         return orders;
     }
 
