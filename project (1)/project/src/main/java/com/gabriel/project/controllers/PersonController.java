@@ -12,8 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/person")
@@ -28,6 +27,38 @@ public class PersonController {
         Person p = personService.registerPerson(dataPerson);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+
+    /*
+
+    *    @GetMapping("/products/{id}")
+    public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") UUID id) {
+        Optional<ProductModel> product0 = productRepository.findById(id);
+        if (product0.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(product0.get());
+
+    }/
+     */
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOnePerson(@PathVariable(value = "id") UUID id) {
+        Optional<Person> optionalPerson = personService.findById(id);
+
+        if (optionalPerson.isEmpty()) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Id not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } else {
+            Person person = optionalPerson.get();
+            return ResponseEntity.status(HttpStatus.OK).body(person);
+        }
+    }
+
+
 
     @GetMapping //indicates that this method handles HTTP GET requests
     public ResponseEntity<List<Person>> findAll() {

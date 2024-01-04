@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PersonService {
@@ -28,4 +31,18 @@ public class PersonService {
     public List<Person> getAllPersons() {
         return repository.findAll();
     }
+
+    public Optional<Person> findById(UUID id) {
+        return repository.findById(id);
+    }
+
+    /*
+    *  public  Person findById(UUID id){
+
+        Optional<Person> obj = repository.findById((id));
+        return obj.get();
+
+    }
+    * */
+
 }
