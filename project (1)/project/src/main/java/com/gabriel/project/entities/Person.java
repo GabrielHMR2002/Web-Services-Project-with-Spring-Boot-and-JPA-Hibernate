@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,6 +28,8 @@ public class Person implements Serializable {
     private String phone;
     private String password;
 
+    private List<Order> orders = new ArrayList<>();
+
     public Person (){
 
     }
@@ -37,5 +41,10 @@ public class Person implements Serializable {
         this.phone = phone;
         this.password = password;
     }
+
+    public List<Order> getOrders(){
+        return orders;
+    }
+
 }
 
