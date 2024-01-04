@@ -1,6 +1,7 @@
 package com.gabriel.project.services;
 
 import com.gabriel.project.entities.Order;
+import com.gabriel.project.entities.RequestOrder;
 import com.gabriel.project.entities.RequestPerson;
 import com.gabriel.project.repositories.OrderRepository;
 import org.springframework.beans.BeanUtils;
@@ -16,6 +17,13 @@ public class OrderService {
 
     @Autowired
     private OrderRepository repository; // Component registration
+
+
+    public Order registerOrder(RequestOrder dataOrder) {
+        Order order = new Order();
+        BeanUtils.copyProperties(dataOrder, order);
+        return (Order) repository.save(order);
+    }
 
     public List<Order> getAllOrders() {
         return repository.findAll();
