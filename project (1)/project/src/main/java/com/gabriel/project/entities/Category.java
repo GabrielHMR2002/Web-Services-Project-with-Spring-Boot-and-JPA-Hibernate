@@ -24,7 +24,7 @@ public class Category implements Serializable {
     private UUID id;
 
     private String name;
-
+@Transient
     private Set<Product> products = new HashSet<>();
 
 

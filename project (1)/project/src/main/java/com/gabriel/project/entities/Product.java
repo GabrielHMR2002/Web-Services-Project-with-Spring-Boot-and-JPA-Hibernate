@@ -25,5 +25,6 @@ public class Product implements Serializable {
     private String description;
     private  Double price;
     private String imgUrl;
+    @Transient
     private Set<Category> categories = new HashSet<>();
 }
