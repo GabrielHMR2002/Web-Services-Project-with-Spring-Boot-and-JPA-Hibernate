@@ -28,4 +28,6 @@ public class Category implements Serializable {
     private Set<Product> products = new HashSet<>();
 
 
+    public Category(Object o, String electronics) {
+    }
 }
